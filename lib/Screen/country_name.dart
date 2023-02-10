@@ -8,6 +8,7 @@ class CountryList extends StatefulWidget {
 }
 
 class _CountryListState extends State<CountryList> {
+  int i = 0;
   List l1 = [
     "🇮🇳 India",
     "🇳🇵 Nepal",
@@ -30,29 +31,33 @@ class _CountryListState extends State<CountryList> {
     "🇪🇬 Egypt",
     "🇫🇷 France",
   ];
-  List color1 = [
-    Colors.purpleAccent,
-    Colors.red,
-    Colors.brown,
-    Colors.pink,
-    Colors.purpleAccent,
-    Colors.red,
-    Colors.brown,
-    Colors.pink,
-    Colors.purpleAccent,
-    Colors.red,
-    Colors.brown,
-    Colors.pink,
-    Colors.purpleAccent,
-    Colors.red,
-    Colors.brown,
-    Colors.pink,
-    Colors.purpleAccent,
-    Colors.red,
-    Colors.brown,
-    Colors.pink,
-  ];
-  int i = 0;
+
+  // List color1 = [
+  //
+  //   Colors.purpleAccent,
+  //   Colors.red,
+  //   Colors.brown,
+  //   Colors.pink,
+  //   Colors.purpleAccent,
+  //   Colors.red,
+  //   Colors.brown,
+  //   Colors.pink,
+  //   Colors.purpleAccent,
+  //   Colors.red,
+  //   Colors.brown,
+  //   Colors.pink,
+  //   Colors.purpleAccent,
+  //   Colors.red,
+  //   Colors.brown,
+  //   Colors.pink,
+  //   Colors.purpleAccent,
+  //   Colors.red,
+  //   Colors.brown,
+  //   Colors.pink,
+  //
+  // ];
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +78,9 @@ class _CountryListState extends State<CountryList> {
       ),
       body: SingleChildScrollView(
         child: Column(
-            children: l1
+            children: l1.asMap().entries
                 .map(
-                  (e) => CountryList(l1[i], color1[i++]),
+                  (e) => CountryList(l1[e.key],e.key%2==0?Colors.red:Colors.yellow),
                 )
                 .toList()),
       ),
@@ -83,10 +88,14 @@ class _CountryListState extends State<CountryList> {
   }
 
   Widget CountryList(String? name, Color? c1) {
-    return Container(
-      height: 100,
+    return Column(
+      children: [
+        SizedBox(
+        height: 5,
+    ),
+      Container(
+      height: 60,
       width: double.infinity,
-      color: c1,
       child: Center(
         child: Text(
           "$name",
@@ -95,6 +104,12 @@ class _CountryListState extends State<CountryList> {
           ),
         ),
       ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(40),
+          color: c1,
+        ),
+    ),
+      ],
     );
   }
 }
